@@ -1,0 +1,5 @@
+Scenario,Events,Pricing,Avg cost basis,Avg billed per event,Operating profit before owner salary/tax,Notes
+Pilot First Five,5,cost + 10%,3200,3520,1600,gratuity optional
+Conservative Year 1,24,mixed packages,5835,140040,59625,after first five
+Base Year 1,54,mixed packages,7078,382212,159149,after first five
+Aggressive Year 2,154,mixed packages,8268,1273272,528498,requires contractors
