@@ -3,13 +3,1592 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="refresh" content="0; url=outputs/nvidia-retirement-party-planner.html">
-  <title>GPU Retirement Send-Offs</title>
+  <title>GPU Retirement Send-Offs | Retirement Party Planner</title>
+  <meta name="description" content="A warm, NDA-aware retirement party planning service for technical teams, GPU pioneers, families, and coworkers.">
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #07110e;
+      --panel: #0d1b18;
+      --panel-2: #122820;
+      --line: rgba(176, 245, 118, 0.25);
+      --text: #f6fff6;
+      --muted: #b9cbbd;
+      --lime: #a6ff4d;
+      --mint: #5fffd3;
+      --sky: #6ecbff;
+      --gold: #f4ca64;
+      --peach: #ffb08a;
+      --cream: #fff2d0;
+      --danger: #ff806b;
+      --radius: 0.5rem;
+      --shadow: 0 1.25rem 5rem rgba(0, 0, 0, 0.42);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 20rem;
+      background:
+        linear-gradient(90deg, rgba(166, 255, 77, 0.08) 1px, transparent 1px) 0 0 / 3.75rem 3.75rem,
+        linear-gradient(180deg, rgba(110, 203, 255, 0.06) 1px, transparent 1px) 0 0 / 3.75rem 3.75rem,
+        radial-gradient(circle at 18% 12%, rgba(95, 255, 211, 0.18), transparent 20rem),
+        radial-gradient(circle at 84% 20%, rgba(244, 202, 100, 0.16), transparent 22rem),
+        linear-gradient(135deg, #05100e 0%, #081815 48%, #101d14 100%);
+      color: var(--text);
+      font-family: "Avenir Next", "Trebuchet MS", Verdana, sans-serif;
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    .shell {
+      width: min(100%, 78rem);
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(166, 255, 77, 0.16);
+      background: rgba(5, 16, 14, 0.86);
+      backdrop-filter: blur(1rem);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 4.25rem;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 0;
+      font-family: "Bahnschrift", "Avenir Next", sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 2.45rem;
+      height: 2.45rem;
+      place-items: center;
+      border: 1px solid rgba(166, 255, 77, 0.55);
+      border-radius: 0.45rem;
+      background: linear-gradient(135deg, rgba(166, 255, 77, 0.22), rgba(95, 255, 211, 0.1));
+      box-shadow: inset 0 0 1.6rem rgba(166, 255, 77, 0.16);
+      color: var(--lime);
+    }
+
+    .brand span:last-child {
+      overflow-wrap: anywhere;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .nav-links a {
+      padding: 0.75rem 0.85rem;
+      border-radius: 999rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.85rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid rgba(166, 255, 77, 0.62);
+      border-radius: 999rem;
+      background: var(--lime);
+      color: #07110e;
+      font-weight: 900;
+      box-shadow: 0 0.8rem 2.2rem rgba(166, 255, 77, 0.24);
+      transition: transform 160ms ease, box-shadow 160ms ease;
+      white-space: nowrap;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 1rem 2.8rem rgba(166, 255, 77, 0.34);
+    }
+
+    .hero {
+      position: relative;
+      padding: 4rem 0 3rem;
+      overflow: clip;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      width: fit-content;
+      margin: 0 0 1rem;
+      padding: 0.45rem 0.7rem;
+      border: 1px solid rgba(95, 255, 211, 0.26);
+      border-radius: 999rem;
+      color: var(--mint);
+      background: rgba(95, 255, 211, 0.08);
+      font-size: 0.8rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    .price {
+      font-family: "Bahnschrift", "Avenir Next", sans-serif;
+      line-height: 1.05;
+      margin: 0;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 12ch;
+      font-size: clamp(3rem, 11vw, 6.4rem);
+      text-transform: none;
+    }
+
+    .hero-copy {
+      max-width: 44rem;
+      margin: 1.25rem 0 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.85rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999rem;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.05);
+      font-weight: 800;
+    }
+
+    .trust-strip {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .trust-item {
+      border-left: 3px solid var(--lime);
+      padding: 0.7rem 0.9rem;
+      background: rgba(0, 0, 0, 0.23);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .poster-frame {
+      position: relative;
+      padding: 0.65rem;
+      border: 1px solid rgba(166, 255, 77, 0.3);
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(166, 255, 77, 0.14), rgba(110, 203, 255, 0.08));
+      box-shadow: var(--shadow);
+    }
+
+    .poster-frame::before {
+      content: "";
+      position: absolute;
+      inset: 0.65rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0.35rem;
+      pointer-events: none;
+    }
+
+    .poster-frame img {
+      width: 100%;
+      aspect-ratio: 9 / 14;
+      object-fit: cover;
+      border-radius: 0.35rem;
+    }
+
+    .hero-note {
+      display: grid;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+      max-width: 37rem;
+      padding: 1rem;
+      border: 1px solid rgba(244, 202, 100, 0.25);
+      border-radius: var(--radius);
+      background: rgba(244, 202, 100, 0.08);
+      color: var(--cream);
+    }
+
+    .hero-note strong {
+      color: var(--gold);
+      font-family: "Bahnschrift", sans-serif;
+      text-transform: uppercase;
+    }
+
+    .section {
+      padding: 3.5rem 0;
+      border-top: 1px solid rgba(166, 255, 77, 0.12);
+    }
+
+    .section-head {
+      display: grid;
+      gap: 0.9rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .section-kicker {
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      max-width: 15ch;
+      font-size: clamp(2.1rem, 7vw, 4.3rem);
+      text-transform: none;
+    }
+
+    .section-copy {
+      max-width: 42rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .welcome-grid,
+    .moment-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .story-panel,
+    .moment-card,
+    .day-card,
+    .note-card {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius);
+      background: rgba(9, 24, 21, 0.86);
+      box-shadow: 0 0.9rem 2.5rem rgba(0, 0, 0, 0.18);
+    }
+
+    .story-panel {
+      display: grid;
+      gap: 1rem;
+      padding: 1.1rem;
+    }
+
+    .story-panel h3,
+    .moment-card h3,
+    .day-card h3,
+    .note-card h3 {
+      font-size: 1.2rem;
+      text-transform: uppercase;
+    }
+
+    .story-panel p,
+    .moment-card p,
+    .day-card p,
+    .note-card p {
+      margin: 0.65rem 0 0;
+      color: var(--muted);
+    }
+
+    .memory-board {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .memory-card {
+      padding: 1rem;
+      border: 1px solid rgba(244, 202, 100, 0.2);
+      border-radius: var(--radius);
+      background: rgba(244, 202, 100, 0.08);
+    }
+
+    .memory-card span {
+      display: block;
+      margin-bottom: 0.35rem;
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .memory-card strong {
+      display: block;
+      color: var(--cream);
+      font-size: 1.05rem;
+      line-height: 1.25;
+    }
+
+    .moment-card,
+    .day-card,
+    .note-card {
+      padding: 1.1rem;
+    }
+
+    .moment-card {
+      min-height: 12rem;
+      background:
+        linear-gradient(135deg, rgba(166, 255, 77, 0.08), transparent 55%),
+        rgba(9, 24, 21, 0.86);
+    }
+
+    .moment-number {
+      display: inline-grid;
+      place-items: center;
+      min-width: 2.35rem;
+      min-height: 2.35rem;
+      margin-bottom: 0.9rem;
+      border: 1px solid rgba(95, 255, 211, 0.38);
+      border-radius: 999rem;
+      color: var(--mint);
+      font-family: "Bahnschrift", sans-serif;
+      font-weight: 900;
+    }
+
+    .day-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .day-card {
+      border-color: rgba(244, 202, 100, 0.22);
+    }
+
+    .day-time {
+      display: block;
+      margin-bottom: 0.45rem;
+      color: var(--peach);
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .note-card {
+      background:
+        linear-gradient(135deg, rgba(244, 202, 100, 0.12), rgba(95, 255, 211, 0.06)),
+        rgba(9, 24, 21, 0.86);
+    }
+
+    .offer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .offer-card,
+    .price-card,
+    .builder,
+    .planner-panel,
+    .planner-output,
+    .proof-panel,
+    .form-panel {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius);
+      background: rgba(9, 24, 21, 0.86);
+      box-shadow: 0 0.9rem 2.5rem rgba(0, 0, 0, 0.18);
+    }
+
+    .offer-card {
+      min-height: 13.5rem;
+      padding: 1.1rem;
+    }
+
+    .offer-card .icon {
+      display: inline-grid;
+      place-items: center;
+      min-width: 3rem;
+      min-height: 3rem;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(166, 255, 77, 0.38);
+      border-radius: 0.45rem;
+      color: var(--lime);
+      background: rgba(166, 255, 77, 0.08);
+      font-family: "Bahnschrift", sans-serif;
+      font-weight: 900;
+    }
+
+    .offer-card h3,
+    .price-card h3 {
+      font-size: 1.22rem;
+      text-transform: uppercase;
+    }
+
+    .offer-card p,
+    .price-card p {
+      color: var(--muted);
+      margin: 0.65rem 0 0;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .price-card {
+      position: relative;
+      padding: 1.1rem;
+      overflow: hidden;
+    }
+
+    .price-card.featured {
+      border-color: rgba(166, 255, 77, 0.56);
+      background: linear-gradient(180deg, rgba(166, 255, 77, 0.1), rgba(9, 24, 21, 0.88));
+    }
+
+    .badge {
+      display: inline-flex;
+      margin-bottom: 0.85rem;
+      padding: 0.3rem 0.5rem;
+      border-radius: 999rem;
+      background: rgba(244, 202, 100, 0.13);
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .price {
+      margin-top: 0.9rem;
+      color: var(--lime);
+      font-size: 2.25rem;
+    }
+
+    .price small {
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .checks {
+      display: grid;
+      gap: 0.65rem;
+      margin: 1rem 0 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+    }
+
+    .checks li {
+      display: grid;
+      grid-template-columns: 1.35rem 1fr;
+      gap: 0.5rem;
+      align-items: start;
+    }
+
+    .checks li::before {
+      content: "+";
+      color: var(--mint);
+      font-weight: 900;
+    }
+
+    .builder-layout {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .planner-layout {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .planner-panel,
+    .planner-output {
+      padding: 1rem;
+    }
+
+    .planner-moments {
+      display: grid;
+      gap: 0.55rem;
+      margin-top: 0.35rem;
+    }
+
+    .planner-output {
+      border-color: rgba(244, 202, 100, 0.28);
+      background:
+        linear-gradient(135deg, rgba(244, 202, 100, 0.1), rgba(95, 255, 211, 0.06)),
+        rgba(9, 24, 21, 0.86);
+    }
+
+    .planner-summary {
+      display: grid;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .planner-summary strong {
+      color: var(--gold);
+      font-family: "Bahnschrift", sans-serif;
+      font-size: 1.35rem;
+      line-height: 1.1;
+    }
+
+    .planner-checklist {
+      display: grid;
+      gap: 0.55rem;
+      margin: 1rem 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .planner-checklist li {
+      display: grid;
+      grid-template-columns: 1.4rem 1fr;
+      gap: 0.5rem;
+      color: var(--muted);
+    }
+
+    .planner-checklist li::before {
+      content: ">";
+      color: var(--mint);
+      font-weight: 900;
+    }
+
+    .planner-brief {
+      width: 100%;
+      min-height: 9rem;
+      margin-top: 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 0.45rem;
+      background: rgba(0, 0, 0, 0.24);
+      color: var(--text);
+      padding: 0.8rem;
+      resize: vertical;
+    }
+
+    .builder {
+      padding: 1rem;
+    }
+
+    .builder fieldset,
+    .planner-panel fieldset {
+      margin: 0 0 1.1rem;
+      padding: 0;
+      border: 0;
+    }
+
+    .builder legend,
+    .planner-panel legend,
+    .field label {
+      margin-bottom: 0.55rem;
+      color: var(--text);
+      font-weight: 900;
+    }
+
+    .segmented {
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .segmented label,
+    .addon,
+    .planner-moments label {
+      display: flex;
+      align-items: center;
+      min-height: 3rem;
+      gap: 0.65rem;
+      padding: 0.78rem;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 0.45rem;
+      background: rgba(255, 255, 255, 0.04);
+      cursor: pointer;
+    }
+
+    .segmented input,
+    .addon input,
+    .planner-moments input {
+      accent-color: var(--lime);
+      width: 1.1rem;
+      height: 1.1rem;
+      flex: 0 0 auto;
+    }
+
+    .addon span:last-child,
+    .segmented span:last-child,
+    .planner-moments span:last-child {
+      margin-left: auto;
+      color: var(--mint);
+      font-weight: 900;
+    }
+
+    .field {
+      display: grid;
+      gap: 0.45rem;
+      margin-bottom: 1rem;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      min-height: 3rem;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 0.45rem;
+      background: rgba(0, 0, 0, 0.24);
+      color: var(--text);
+      padding: 0.8rem;
+    }
+
+    .field textarea {
+      min-height: 7.5rem;
+      resize: vertical;
+    }
+
+    .estimate {
+      position: sticky;
+      top: 5rem;
+      padding: 1rem;
+      align-self: start;
+      border-color: rgba(166, 255, 77, 0.34);
+      background:
+        linear-gradient(180deg, rgba(166, 255, 77, 0.1), rgba(9, 24, 21, 0.92)),
+        var(--panel);
+    }
+
+    .estimate-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .estimate-title strong {
+      font-family: "Bahnschrift", sans-serif;
+      text-transform: uppercase;
+    }
+
+    .estimate-total {
+      color: var(--lime);
+      font-family: "Bahnschrift", sans-serif;
+      font-size: 2.6rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .estimate-lines {
+      display: grid;
+      gap: 0.45rem;
+      margin: 1rem 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .estimate-lines div {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 0.45rem;
+    }
+
+    .fine-print {
+      color: #95a89a;
+      font-size: 0.86rem;
+    }
+
+    .proof-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .proof-panel {
+      padding: 1.1rem;
+    }
+
+    .quote {
+      margin: 0;
+      color: var(--text);
+      font-size: 1.25rem;
+      font-weight: 800;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .timeline div {
+      padding-left: 1rem;
+      border-left: 2px solid rgba(166, 255, 77, 0.4);
+    }
+
+    .timeline strong {
+      display: block;
+      color: var(--lime);
+    }
+
+    .form-panel {
+      padding: 1rem;
+    }
+
+    .split {
+      display: grid;
+      gap: 1rem;
+    }
+
+    footer {
+      padding: 2rem 0 3rem;
+      color: #8fa196;
+      font-size: 0.9rem;
+    }
+
+    .footer-row {
+      display: grid;
+      gap: 0.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding-top: 1.25rem;
+    }
+
+    @media (min-width: 640px) {
+      .shell {
+        padding: 0 1.5rem;
+      }
+
+      .trust-strip {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .offer-grid,
+      .pricing-grid,
+      .moment-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .segmented {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+      }
+
+      .hero {
+        padding-top: 5rem;
+      }
+
+      .section-head {
+        grid-template-columns: 0.9fr 1fr;
+        align-items: end;
+      }
+
+      .welcome-grid {
+        grid-template-columns: 0.92fr 1.08fr;
+        align-items: stretch;
+      }
+
+      .split {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1.08fr) minmax(18rem, 0.72fr);
+      }
+
+      .poster-frame {
+        transform: rotate(1.5deg);
+      }
+
+      .offer-grid {
+        grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+      }
+
+      .pricing-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .day-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .moment-grid {
+        grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+      }
+
+      .builder-layout,
+      .planner-layout,
+      .proof-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.42fr);
+      }
+
+      .footer-row {
+        grid-template-columns: 1fr auto;
+      }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .offer-card,
+      .price-card,
+      .proof-panel,
+      .form-panel,
+      .builder,
+      .poster-frame {
+        animation: rise 650ms ease both;
+      }
+
+      .offer-card:nth-child(2),
+      .price-card:nth-child(2) {
+        animation-delay: 90ms;
+      }
+
+      .offer-card:nth-child(3),
+      .price-card:nth-child(3) {
+        animation-delay: 180ms;
+      }
+
+      .offer-card:nth-child(4) {
+        animation-delay: 270ms;
+      }
+
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(1rem);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    }
+  </style>
 </head>
 <body>
-  <p>
-    Opening GPU Retirement Send-Offs.
-    <a href="outputs/nvidia-retirement-party-planner.html">Continue to the site</a>.
-  </p>
+  <header class="topbar">
+    <div class="shell nav" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="GPU Retirement Party Planner home">
+        <span class="brand-mark" aria-hidden="true">GPU</span>
+        <span>Retirement Party Planner</span>
+      </a>
+      <nav class="nav-links" aria-label="Page sections">
+        <a href="#experience">Experience</a>
+        <a href="#moments">Moments</a>
+        <a href="#planner">Planner</a>
+        <a href="#packages">Packages</a>
+        <a href="#builder">Quote</a>
+      </nav>
+      <a class="cta" href="#builder">Start Planning</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">For the people who built the future</p>
+          <h1>A send-off YOU will actually love</h1>
+          <p class="hero-copy">Retirement parties should feel like the person, not a calendar hold. We turn a technical career into a warm, funny, NDA-aware celebration with stories, cake, group photos, giveaways, music cues, games, and a toast that makes the room remember why this person mattered.</p>
+          <div class="hero-actions">
+            <a class="cta" href="#experience">See the Experience</a>
+            <a class="secondary" href="#builder">Build a Quote</a>
+          </div>
+          <div class="trust-strip" aria-label="Service highlights">
+            <div class="trust-item"><strong>For retirees.</strong><br>The page centers dignity, joy, friendship, family, and the memories they will keep.</div>
+            <div class="trust-item"><strong>For teams.</strong><br>Team lore, product eras, and career milestones become a coherent party theme.</div>
+            <div class="trust-item"><strong>For privacy.</strong><br>Achievements can be celebrated without revealing confidential technical details.</div>
+          </div>
+          <div class="hero-note">
+            <strong>The promise</strong>
+            <span>No awkward slideshow dumped on a projector. No generic sheet cake in a break room. A real celebration with the retiree at the center.</span>
+          </div>
+        </div>
+        <aside class="poster-frame" aria-label="Concept poster preview">
+          <img src="outputs/assets/nvidia-retirement-concept.png" alt="Concept poster for an NVIDIA retirement party planner with GPU retirement send-off ideas">
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">The retiree experience</p>
+            <h2>Make the room feel like home</h2>
+          </div>
+          <p class="section-copy">The website now sells the emotional result first: a celebration that makes the retiree laugh, relax, see their people gathered around them, and leave with something tangible from the day.</p>
+        </div>
+        <div class="welcome-grid">
+          <article class="story-panel">
+            <h3>What they get to enjoy</h3>
+            <ul class="checks">
+              <li>A warm welcome moment that makes them feel honored, not put on the spot</li>
+              <li>A short career story that family and coworkers can both understand</li>
+              <li>A birthday cake or retirement cake that feels personal, not generic</li>
+              <li>A group photo moment so the day is remembered outside the office chat</li>
+              <li>Giveaways, table cards, and small keepsakes that make people smile</li>
+            </ul>
+          </article>
+          <div class="memory-board" aria-label="Retiree-friendly memory prompts">
+            <div class="memory-card">
+              <span>Memory prompt</span>
+              <strong>"What did they teach you that you still use?"</strong>
+            </div>
+            <div class="memory-card">
+              <span>Toast prompt</span>
+              <strong>"What moment made everyone realize they were the real deal?"</strong>
+            </div>
+            <div class="memory-card">
+              <span>Family prompt</span>
+              <strong>"What should people outside work know about who they are?"</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="moments">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Moments retirees enjoy</p>
+            <h2>Less corporate, more personal</h2>
+          </div>
+          <p class="section-copy">These are the parts people remember: the cake, the photos, the jokes that land, the team gifts, the music cue, and the little ritual where everyone gets to say, "you mattered here."</p>
+        </div>
+        <div class="moment-grid">
+          <article class="moment-card">
+            <span class="moment-number">01</span>
+            <h3>Story wall</h3>
+            <p>Printed cards and table prompts collect memories before the toast, so the retiree hears from more than just the loudest person in the room.</p>
+          </article>
+          <article class="moment-card">
+            <span class="moment-number">02</span>
+            <h3>Cake reveal</h3>
+            <p>A themed cake moment with flavor notes, candles, and a message that can lean birthday, retirement, or both.</p>
+          </article>
+          <article class="moment-card">
+            <span class="moment-number">03</span>
+            <h3>Group photo</h3>
+            <p>A planned team photo with the retiree centered, a clean backdrop, and optional prints or digital delivery afterward.</p>
+          </article>
+          <article class="moment-card">
+            <span class="moment-number">04</span>
+            <h3>Giveaway table</h3>
+            <p>Small prizes, custom cards, stickers, raffle prompts, and keepsakes give guests something fun to take home.</p>
+          </article>
+          <article class="moment-card">
+            <span class="moment-number">05</span>
+            <h3>Career soundtrack</h3>
+            <p>Walk-up music, favorite songs, team-submitted tracks, and a short audio montage make the room feel personal before anyone speaks.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Day-of flow</p>
+            <h2>A party that does not drag</h2>
+          </div>
+          <p class="section-copy">Retirees usually do not want a stiff ceremony. The flow keeps the room moving, gives people permission to laugh, and saves the heartfelt part for the right moment.</p>
+        </div>
+        <div class="day-grid">
+          <article class="day-card">
+            <span class="day-time">Arrival</span>
+            <h3>Memory table</h3>
+            <p>Guests sign cards, pick up giveaway tickets, and see photos from the retiree's career.</p>
+          </article>
+          <article class="day-card">
+            <span class="day-time">Opening</span>
+            <h3>Short welcome</h3>
+            <p>A host sets the tone in under three minutes, then invites the room into the celebration.</p>
+          </article>
+          <article class="day-card">
+            <span class="day-time">Middle</span>
+            <h3>Photos and cake</h3>
+            <p>The group photo, cake reveal, and light games happen while the energy is still high.</p>
+          </article>
+          <article class="day-card">
+            <span class="day-time">Finale</span>
+            <h3>Toast and send-off</h3>
+            <p>The deck, music cue, and closing words make the goodbye feel complete.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="planner">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Party planner toolkit</p>
+            <h2>Sketch the celebration in two minutes</h2>
+          </div>
+          <p class="section-copy">Choose the date, tone, and must-have moments. The planner turns it into a first checklist and a copyable brief you can send to the team, family, or our quote form.</p>
+        </div>
+        <div class="planner-layout">
+          <form class="planner-panel" id="plannerForm">
+            <div class="split">
+              <div class="field">
+                <label for="retireeName">Retiree name</label>
+                <input id="retireeName" name="retireeName" placeholder="Pat">
+              </div>
+              <div class="field">
+                <label for="eventDate">Event date</label>
+                <input id="eventDate" name="eventDate" type="date">
+              </div>
+            </div>
+            <div class="split">
+              <div class="field">
+                <label for="plannerTone">Celebration tone</label>
+                <select id="plannerTone" name="plannerTone">
+                  <option value="warm and heartfelt">Warm and heartfelt</option>
+                  <option value="funny and light">Funny and light</option>
+                  <option value="polished and executive">Polished and executive</option>
+                  <option value="family-forward">Family-forward</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="plannerGuests">Guest range</label>
+                <select id="plannerGuests" name="plannerGuests">
+                  <option value="under 25 guests">Under 25 guests</option>
+                  <option value="25 to 60 guests">25 to 60 guests</option>
+                  <option value="60 to 120 guests">60 to 120 guests</option>
+                  <option value="120 plus guests">120 plus guests</option>
+                </select>
+              </div>
+            </div>
+            <fieldset>
+              <legend>Must-have moments</legend>
+              <div class="planner-moments">
+                <label><input type="checkbox" data-planner-moment="cake" checked><span>Cake reveal</span><span>dessert</span></label>
+                <label><input type="checkbox" data-planner-moment="photo" checked><span>Group photo</span><span>keepsake</span></label>
+                <label><input type="checkbox" data-planner-moment="music" checked><span>Career soundtrack</span><span>audio</span></label>
+                <label><input type="checkbox" data-planner-moment="giveaway"><span>Giveaway table</span><span>gifts</span></label>
+                <label><input type="checkbox" data-planner-moment="story" checked><span>Memory cards and toast prompts</span><span>story</span></label>
+                <label><input type="checkbox" data-planner-moment="food"><span>Food and drink coordination</span><span>hosting</span></label>
+              </div>
+            </fieldset>
+          </form>
+
+          <aside class="planner-output" id="plannerOutput" aria-live="polite">
+            <div class="planner-summary">
+              <span class="badge">Draft plan</span>
+              <strong id="plannerHeadline">A warm retirement celebration</strong>
+              <span class="fine-print" id="plannerTiming">Add a date to see planning timing.</span>
+            </div>
+            <ul class="planner-checklist" id="plannerChecklist"></ul>
+            <label class="fine-print" for="plannerBrief">Copyable planning brief</label>
+            <textarea class="planner-brief" id="plannerBrief" readonly></textarea>
+            <div class="hero-actions">
+              <button class="secondary" type="button" id="copyPlannerBrief">Copy Brief</button>
+              <button class="cta" type="button" id="sendBriefToQuote">Send to Quote Notes</button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="offer">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">What we handle</p>
+            <h2>All the details that make it feel personal</h2>
+          </div>
+          <p class="section-copy">You bring the names, stories, and inside references. We turn them into the pieces people can see, taste, hear, photograph, and take home.</p>
+        </div>
+        <div class="offer-grid">
+          <article class="offer-card">
+            <span class="icon" aria-hidden="true">TEE</span>
+            <h3>T-shirts and gear</h3>
+            <p>Custom retirement shirts, badges, posters, stickers, and table signage built around the retiree's team, era, and inside references.</p>
+          </article>
+          <article class="offer-card">
+            <span class="icon" aria-hidden="true">NDA</span>
+            <h3>Career story care</h3>
+            <p>A structured intake turns scientific and engineering achievements into safe, warm celebration copy that family can understand.</p>
+          </article>
+          <article class="offer-card">
+            <span class="icon" aria-hidden="true">PPT</span>
+            <h3>Career story deck</h3>
+            <p>A polished presentation with milestones, team photos, quote slides, product timeline moments, and a closing toast.</p>
+          </article>
+          <article class="offer-card">
+            <span class="icon" aria-hidden="true">SONG</span>
+            <h3>Music moment</h3>
+            <p>A walk-up song, custom tribute track, retiree playlist, voice-note montage, or instrumental opener for the entrance and toast.</p>
+          </article>
+          <article class="offer-card">
+            <span class="icon" aria-hidden="true">CAKE</span>
+            <h3>GPU birthday cake</h3>
+            <p>A themed cake brief for bakery partners: circuit-board frosting, wafer-style layers, green candles, retirement jokes, and a clean birthday message.</p>
+          </article>
+          <article class="offer-card">
+            <span class="icon" aria-hidden="true">PHOTO</span>
+            <h3>Team group photo</h3>
+            <p>A planned photo moment with shot list, backdrop direction, retiree-center staging, and optional printed keepsakes for teammates.</p>
+          </article>
+          <article class="offer-card">
+            <span class="icon" aria-hidden="true">GIFT</span>
+            <h3>Giveaway table</h3>
+            <p>A raffle or take-home gift moment with branded keepsakes, prize cards, winner prompts, and a simple way for guests to remember the retiree.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="packages">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Celebration levels</p>
+            <h2>Choose the amount of help you want</h2>
+          </div>
+          <p class="section-copy">Some teams need a polished toast and a cake. Others want a full room, music, photos, giveaways, and a keepsake package. Start with the level that matches the moment.</p>
+        </div>
+        <div class="pricing-grid">
+          <article class="price-card">
+            <span class="badge">Warm and simple</span>
+            <h3>Founders' Toast</h3>
+            <p>Best for lunchrooms, team lounges, and a heartfelt celebration without a heavy production.</p>
+            <div class="price">$1,750 <small>from</small></div>
+            <ul class="checks">
+              <li>Theme direction and party run-of-show</li>
+              <li>One custom poster or welcome board</li>
+              <li>Five-slide career toast deck</li>
+              <li>Remote coordination checklist</li>
+            </ul>
+          </article>
+          <article class="price-card featured">
+            <span class="badge">Most popular</span>
+            <h3>GPU Giant</h3>
+            <p>The signature celebration package for a legendary technical career and the team around it.</p>
+            <div class="price">$4,800 <small>from</small></div>
+            <ul class="checks">
+              <li>Custom visual theme and merch concept</li>
+              <li>NDA-aware achievement interview</li>
+              <li>Fifteen-slide commemorative deck</li>
+              <li>Walk-up music and toast cue planning</li>
+              <li>Birthday cake direction and dessert-table signage</li>
+              <li>Team group photo setup and shot list</li>
+              <li>Small giveaway table with prize prompts</li>
+              <li>Party games, signage, and toast prompts</li>
+              <li>Vendor coordination for food and AV</li>
+            </ul>
+          </article>
+          <article class="price-card">
+            <span class="badge">Premium</span>
+            <h3>Legendary Send-Off</h3>
+            <p>For executive, lab-wide, family-forward, or multi-team events that should feel like a true milestone.</p>
+            <div class="price">$9,500 <small>from</small></div>
+            <ul class="checks">
+              <li>Full event creative direction</li>
+              <li>Custom theme song, playlist, or voice-note montage</li>
+              <li>Premium cake concept and dessert moment</li>
+              <li>Professional group photo wall and keepsake prints</li>
+              <li>Premium giveaway kit for guests and raffle winners</li>
+              <li>Premium merch and guest keepsakes</li>
+              <li>On-site event lead and AV coordination</li>
+              <li>Post-event memory package</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="builder">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Plan the celebration</p>
+            <h2>Build a first-pass quote</h2>
+          </div>
+          <p class="section-copy">Pick the pieces that feel right. The estimate is not a contract, just a useful starting point for planning the celebration.</p>
+        </div>
+        <div class="builder-layout">
+          <form class="builder" id="quoteForm">
+            <fieldset>
+              <legend>Choose a package</legend>
+              <div class="segmented">
+                <label><input type="radio" name="package" value="1750" data-label="Founders' Toast" checked><span>Founders' Toast</span><span>$1,750</span></label>
+                <label><input type="radio" name="package" value="4800" data-label="GPU Giant"><span>GPU Giant</span><span>$4,800</span></label>
+                <label><input type="radio" name="package" value="9500" data-label="Legendary Send-Off"><span>Legendary</span><span>$9,500</span></label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Add the moments they will remember</legend>
+              <label class="addon"><input type="checkbox" value="650" data-label="Custom shirts and gear"><span>Custom shirts and gear</span><span>+$650</span></label>
+              <label class="addon"><input type="checkbox" value="900" data-label="NDA-safe scientific contribution package"><span>NDA-safe contribution package</span><span>+$900</span></label>
+              <label class="addon"><input type="checkbox" value="1200" data-label="Career soundtrack package"><span>Career soundtrack package</span><span>+$1,200</span></label>
+              <label class="addon"><input type="checkbox" value="850" data-label="GPU birthday cake design and bakery coordination"><span>GPU birthday cake design</span><span>+$850</span></label>
+              <label class="addon"><input type="checkbox" value="1100" data-label="Team group photo setup and keepsake print coordination"><span>Team group photo setup</span><span>+$1,100</span></label>
+              <label class="addon"><input type="checkbox" value="950" data-label="Giveaway table with prize cards and keepsake sourcing"><span>Giveaway table kit</span><span>+$950</span></label>
+              <label class="addon"><input type="checkbox" value="1500" data-label="Catering and vendor coordination"><span>Catering and vendor coordination</span><span>+$1,500</span></label>
+            </fieldset>
+
+            <div class="split">
+              <div class="field">
+                <label for="guests">Estimated guests</label>
+                <select id="guests" name="guests">
+                  <option value="0">Under 25</option>
+                  <option value="750">25 to 60</option>
+                  <option value="1600">60 to 120</option>
+                  <option value="3200">120 plus</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="timeline">Event timeline</label>
+                <select id="timeline" name="timeline">
+                  <option value="0">Six or more weeks</option>
+                  <option value="600">Three to five weeks</option>
+                  <option value="1400">Under three weeks</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="split">
+              <div class="field">
+                <label for="name">Contact name</label>
+                <input id="name" name="name" autocomplete="name" placeholder="Your name">
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com">
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="notes">What should this retirement feel like?</label>
+              <textarea id="notes" name="notes" placeholder="Team size, retiree personality, product era, favorite stories, favorite songs, birthday angle, cake flavors, group photo needs, giveaway ideas, venue, deadline, confidentiality concerns."></textarea>
+            </div>
+
+            <button class="cta" type="submit">Request Quote</button>
+            <p class="fine-print">No payment is collected here. The button opens an email draft with the package, add-ons, estimated budget, and event notes.</p>
+          </form>
+
+          <aside class="price-card estimate" aria-live="polite">
+            <div class="estimate-title">
+              <strong>Estimated budget</strong>
+              <span class="badge">Draft</span>
+            </div>
+            <div class="estimate-total" id="total">$1,750</div>
+            <div class="estimate-lines" id="lines"></div>
+            <p class="fine-print">Final pricing depends on venue rules, print quantities, travel, rush timing, and whether branded assets are approved for use.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell proof-grid">
+        <div class="proof-panel">
+          <p class="section-kicker">Easy planning</p>
+          <p class="quote">The goal is simple: make a technical career feel human, funny, respectful, and safe to share without asking the team to invent a whole event from scratch.</p>
+          <div class="timeline">
+            <div><strong>1. Theme call</strong>We learn the retiree's personality, career era, favorite stories, and comfort level.</div>
+            <div><strong>2. Story intake</strong>We collect safe, shareable memories from teammates, family, and leaders.</div>
+            <div><strong>3. Celebration kit</strong>Merch, deck, cake notes, giveaway table, catering coordination, AV, and keepsakes come together.</div>
+            <div><strong>4. Day-of rhythm</strong>The room gets a clear flow, enough structure, and space for real emotion.</div>
+          </div>
+        </div>
+        <div class="form-panel">
+          <p class="section-kicker">Positioning</p>
+          <h3>Built for confidential careers</h3>
+          <p class="section-copy">The strongest differentiator is not decorations. It is translating a sensitive technical career into a celebration that family, coworkers, and leadership can all enjoy.</p>
+          <ul class="checks">
+            <li>No proprietary claims in public materials unless supplied and approved by the client</li>
+            <li>Private interview workflow for career achievements and team stories</li>
+            <li>Optional executive review pass before presentations are shown</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-row">
+      <div>GPU Retirement Party Planner is an independent event concept and is not affiliated with, endorsed by, or sponsored by NVIDIA Corporation.</div>
+      <div>NVIDIA and related marks are trademarks of NVIDIA Corporation.</div>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.querySelector("#quoteForm");
+    const totalEl = document.querySelector("#total");
+    const linesEl = document.querySelector("#lines");
+    const plannerForm = document.querySelector("#plannerForm");
+    const plannerHeadline = document.querySelector("#plannerHeadline");
+    const plannerTiming = document.querySelector("#plannerTiming");
+    const plannerChecklist = document.querySelector("#plannerChecklist");
+    const plannerBrief = document.querySelector("#plannerBrief");
+    const copyPlannerBrief = document.querySelector("#copyPlannerBrief");
+    const sendBriefToQuote = document.querySelector("#sendBriefToQuote");
+    const currency = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+
+    const plannerMomentTasks = {
+      cake: [
+        "Confirm favorite cake flavor, serving size, and whether the message should lean birthday, retirement, or both.",
+        "Create a cake brief with theme notes, colors, candles, dietary needs, and bakery deadline."
+      ],
+      photo: [
+        "Pick the group photo moment in the run-of-show before people start leaving.",
+        "Choose a backdrop, shot list, and delivery format for prints or digital keepsakes."
+      ],
+      music: [
+        "Collect favorite songs, songs to avoid, and one entrance or toast cue.",
+        "Build a short career soundtrack for arrival, cake/photo, and closing moments."
+      ],
+      giveaway: [
+        "Choose giveaway items, raffle prompts, and a pickup table location.",
+        "Prepare prize cards or keepsake labels that connect the gifts to the retiree."
+      ],
+      story: [
+        "Send memory prompts to coworkers and family at least two weeks before the event.",
+        "Select three to five safe stories for the toast and presentation."
+      ],
+      food: [
+        "Confirm food and drink needs, timing, venue rules, and cleanup ownership.",
+        "Match the menu to the guest count and the retiree's preferences."
+      ]
+    };
+
+    function selectedPackage() {
+      return form.querySelector("input[name='package']:checked");
+    }
+
+    function currentEstimate() {
+      const rows = [];
+      let total = 0;
+      const pkg = selectedPackage();
+      const fields = form.elements;
+      total += Number(pkg.value);
+      rows.push([pkg.dataset.label, Number(pkg.value)]);
+
+      form.querySelectorAll(".addon input:checked").forEach((addon) => {
+        total += Number(addon.value);
+        rows.push([addon.dataset.label, Number(addon.value)]);
+      });
+
+      const guestFee = Number(fields.guests.value);
+      if (guestFee > 0) {
+        total += guestFee;
+        rows.push([`Guest scale: ${fields.guests.options[fields.guests.selectedIndex].text}`, guestFee]);
+      }
+
+      const timelineFee = Number(fields.timeline.value);
+      if (timelineFee > 0) {
+        total += timelineFee;
+        rows.push([`Timeline: ${fields.timeline.options[fields.timeline.selectedIndex].text}`, timelineFee]);
+      }
+
+      return { total, rows };
+    }
+
+    function renderEstimate() {
+      const estimate = currentEstimate();
+      totalEl.textContent = currency.format(estimate.total);
+      linesEl.innerHTML = estimate.rows
+        .map(([label, price]) => `<div><span>${label}</span><strong>${currency.format(price)}</strong></div>`)
+        .join("");
+      return estimate;
+    }
+
+    form.addEventListener("input", renderEstimate);
+    form.addEventListener("change", renderEstimate);
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const estimate = renderEstimate();
+      const fields = form.elements;
+      const addons = estimate.rows.map(([label, price]) => `- ${label}: ${currency.format(price)}`).join("\n");
+      const subject = encodeURIComponent("GPU Retirement Party Quote Request");
+      const body = [
+        "Hi, I'd like a quote for a GPU retirement party.",
+        "",
+        `Estimated budget: ${currency.format(estimate.total)}`,
+        "",
+        "Selected items:",
+        addons,
+        "",
+        `Contact name: ${fields.name.value || ""}`,
+        `Email: ${fields.email.value || ""}`,
+        "",
+        "Notes:",
+        fields.notes.value || ""
+      ].join("\n");
+      window.location.href = `mailto:hello@techcelebrations.co?subject=${subject}&body=${encodeURIComponent(body)}`;
+    });
+
+    function plannerDaysUntil(dateValue) {
+      if (!dateValue) {
+        return null;
+      }
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const eventDate = new Date(`${dateValue}T00:00:00`);
+      return Math.ceil((eventDate - today) / 86400000);
+    }
+
+    function selectedPlannerMoments() {
+      return [...plannerForm.querySelectorAll("[data-planner-moment]:checked")]
+        .map((input) => input.dataset.plannerMoment);
+    }
+
+    function buildPlannerPlan() {
+      const fields = plannerForm.elements;
+      const retiree = fields.retireeName.value.trim() || "the retiree";
+      const tone = fields.plannerTone.value;
+      const guests = fields.plannerGuests.value;
+      const days = plannerDaysUntil(fields.eventDate.value);
+      const moments = selectedPlannerMoments();
+      const tasks = [
+        "Choose one host who can keep the program warm and on time.",
+        "Confirm the retiree's comfort level with speeches, jokes, photos, and surprises.",
+        "Collect photos from at least three parts of the retiree's life: work, team, and family."
+      ];
+
+      if (days === null) {
+        tasks.unshift("Pick a target event date so vendors, photos, and memory prompts have a real timeline.");
+      } else if (days < 0) {
+        tasks.unshift("Choose a new future event date before reserving vendors or sending invitations.");
+      } else if (days <= 14) {
+        tasks.unshift("Use a rush plan: lock venue, cake, group photo, and one simple toast format first.");
+      } else if (days <= 42) {
+        tasks.unshift("Start the memory intake this week and reserve cake, photo, music, and food vendors.");
+      } else {
+        tasks.unshift("Use the extra lead time to gather better stories, photos, songs, and family notes.");
+      }
+
+      moments.forEach((moment) => {
+        tasks.push(...plannerMomentTasks[moment]);
+      });
+
+      return {
+        retiree,
+        tone,
+        guests,
+        date: fields.eventDate.value,
+        days,
+        moments,
+        headline: `${retiree} gets a ${tone} send-off`,
+        timing: days === null
+          ? "Add a date to see planning timing."
+          : days < 0
+            ? "This date is in the past. Pick a future celebration date."
+            : days === 0
+              ? "This is today. Keep the plan simple and focus on the essentials."
+              : `${days} day${days === 1 ? "" : "s"} to plan for ${guests}.`,
+        tasks: [...new Set(tasks)]
+      };
+    }
+
+    function plannerBriefText(plan) {
+      return [
+        `Retirement party brief for ${plan.retiree}`,
+        `Tone: ${plan.tone}`,
+        `Guest range: ${plan.guests}`,
+        `Event date: ${plan.date || "not set"}`,
+        `Must-have moments: ${plan.moments.length ? plan.moments.join(", ") : "not selected"}`,
+        "",
+        "Planning checklist:",
+        ...plan.tasks.map((task) => `- ${task}`)
+      ].join("\n");
+    }
+
+    function renderPlannerPlan() {
+      const plan = buildPlannerPlan();
+      plannerHeadline.textContent = plan.headline;
+      plannerTiming.textContent = plan.timing;
+      plannerChecklist.replaceChildren(...plan.tasks.map((task) => {
+        const item = document.createElement("li");
+        item.textContent = task;
+        return item;
+      }));
+      plannerBrief.value = plannerBriefText(plan);
+      return plan;
+    }
+
+    plannerForm.addEventListener("input", renderPlannerPlan);
+    plannerForm.addEventListener("change", renderPlannerPlan);
+
+    copyPlannerBrief.addEventListener("click", async () => {
+      plannerBrief.select();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(plannerBrief.value);
+      } else {
+        document.execCommand("copy");
+      }
+      copyPlannerBrief.textContent = "Copied";
+      setTimeout(() => {
+        copyPlannerBrief.textContent = "Copy Brief";
+      }, 1400);
+    });
+
+    sendBriefToQuote.addEventListener("click", () => {
+      const fields = form.elements;
+      fields.notes.value = `${fields.notes.value ? `${fields.notes.value}\n\n` : ""}${plannerBrief.value}`;
+      window.location.hash = "builder";
+      fields.notes.focus();
+    });
+
+    renderPlannerPlan();
+    renderEstimate();
+  </script>
 </body>
 </html>
